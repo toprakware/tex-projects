@@ -1,0 +1,528 @@
+\section{Preliminaries} \label{section2}
+
+In this section, we will have a more formal and rigorous approach to
+what we have discussed in section \ref{intro}. We will give the definition of
+the coordinate map of a vector space, the $\F^{n} \to \F^{m}$
+representation of a linear transformation and at the end of the section,
+we will define an isomorphism from the space of linear transformations
+from $V$ to $W$ to the space of linear transformations from
+$\F^{n}$ to $\F^{m}$ where $\dim{V} = n$ and $\dim{W} = m$.
+
+\subsection{Coordinate Map of a Vector Space}
+
+Before moving on to our first theorem, let us restate some useful facts.
+
+\begin{remark}
+    Let $V$ be a vector space over the field $\F$ and let
+    $\B = (v_{1}, v_{2}, \dots, v_{n})$ be an ordered basis for $V$. Then
+    there exist unique scalars $\lambda_{i} \in \F$ with $1 \leq i \leq n$
+    such that
+    %
+    \[
+        v = \sum_{i=1}^{n} \lambda_{i} v_{i}.    
+    \]
+\end{remark}
+
+
+\begin{remark}
+    Let $V$ be a vector space over the field $\F$ and let
+    $\B = (v_{1}, v_{2}, \dots, v_{n})$ be an ordered basis for $V$. Then
+    the \textbf{coordinate matrix} of a vector $v \in V$ with respect to
+    basis $\B$, denoted by $\comat{v}{\B}$, is defined as
+    %
+    \[
+        \comat{v}{\B} = \begin{pmatrix}
+                            \lambda_{1} \\
+                            \lambda_{2} \\
+                            \vdots \\
+                            \lambda_{n}
+                        \end{pmatrix}        
+        \iff
+        v = \sum_{i=1}^{n} \lambda_{i} v_{i}
+    \]
+    %
+    with $\lambda_{i} \in \F$, $1 \leq i \leq n$.
+\end{remark}
+
+
+\begin{remark}
+    Let $V$ and $W$ be vector spaces over the same field $\F$. We call that
+    a function $\func{\varphi}{V}{W}$ is a \textbf{linear transformation}
+    iff the following conditions hold:
+    %
+    \begin{itemize}
+        \item[(a)] For all $v, w \in V$,
+        \[
+            \varphi(v + w) = \varphi(v) + \varphi(w).
+        \]
+    
+        \item[(b)] For all $v \in V$, $c \in \F$,
+        \[
+            \varphi(c \cdot v) = c \cdot \varphi(v).
+        \]
+    \end{itemize}
+    %
+    Moreover, if this linear transformation is bijective then it is called
+    an \textbf{isomorphism} (or \textbf{vector space isomorphism}). If that is
+    the case, we say that the vector spaces $V$ and $W$ are isomorphic.
+\end{remark}
+
+Now, we give our first fundamental theorem:
+
+\begin{theorem} \label{thrm1}
+    Let $V$ be a vector space over the field $\F$. Let 
+    $\B = (v_{1}, v_{2}, \dots, v_{n})$ be an ordered basis for $V$ and let
+    $\{e_{1}, e_{2}, \dots, e_{n}\}$ be the standard basis of $\F^{n}$. Then
+    there exists an isomorphism $\func{\phi}{V}{\F^{n}}$ that satisfies the
+    equality
+    %
+    \[
+        \phi(v_{i}) = e_{i}    
+    \]
+    %
+    for all $1 \leq i \leq n$.
+\end{theorem}
+
+\begin{proof}
+    Define the following function
+    %
+    \[
+        \function{\phi}
+        {V}{\F^{n}}
+        {v}{\phi(v) = \comat{v}{\B}}    
+    \]
+    %
+    that takes a vector from $V$ and maps it to its coordinate matrix with
+    respect to basis $\B$. We claim that this function is an isomorphism.
+    Moreover, it satisfies the equality $\phi(v_{i}) = e_{i}$ for all
+    $1 \leq i \leq n$.
+    %
+    \begin{enumerate}
+        \item \textbf{Linearity.}
+        \begin{enumerate}
+            \item For all $v, w \in V$,
+            \[
+                \comap{V}{\B}(v + w) = \comat{v + w}{\B}
+                                     = \comat{v}{\B} + \comat{w}{\B}
+                                     = \comap{V}{\B}(v) + \comap{V}{\B}(w).
+            \]
+            
+            \item For all $v \in V$, $c \in \F$,
+            \[
+                \comap{V}{\B}(c \cdot v) = \comat{c \cdot v}{\B}
+                                         = c \cdot \comat{v}{\B}
+                                         = c \cdot \comap{V}{\B}(v).
+            \]
+        \end{enumerate}
+        %
+        Therefore, $\comap{V}{\B}$ is a linear transformation. Now, it is
+        left to be shown that it is a bijection:
+        \vspace*{0.2cm}
+
+        \item \textbf{Injectivity.} Let $v, w\in V$ and let
+        $\comap{V}{\B}(v) = \comap{V}{\B}(w)$. We need to show that $v = w$.
+        Since $\B$ is a basis for $V$, there exist unique scalars
+        $\lambda_{i}, \mu_{i} \in \F$ such that
+        %
+        \[
+            v = \sum_{i=1}^{n} \lambda_{i} v_{i}
+            \quad \text{and} \quad
+            w = \sum_{i=1}^{n} \mu_{i} v_{i}.
+        \]
+        %
+        Therefore,
+        %
+        \[
+            \comap{V}{\B}(v) = \comat{v}{\B} 
+                             = (\lambda_{1}, \lambda_{2}, \dots, \lambda_{n})
+            \quad \text{and} \quad
+            \comap{V}{\B}(w) = \comat{w}{\B}
+                             = (\mu_{1}, \mu_{2}, \dots, \mu_{n})
+        \]
+        %
+        by the definition of coordinate matrices. Because
+        $\comap{V}{\B}(v) = \comap{V}{\B}(w)$ by our assumption, we have
+        %
+        \[
+            (\lambda_{1}, \lambda_{2}, \dots, \lambda_{n}) = (\mu_{1}, \mu_{2}, \dots, \mu_{n}).
+        \]
+        %
+        By the definition of matrix equality, it concludes that
+        $\lambda_{i} = \mu_{i}$ for all $1 \leq i \leq n$. Thus, $v = w$.
+        \vspace*{0.2cm}
+
+        \item \textbf{Surjectivity.} Let $x = (x_{1}, x_{2}, \dots, x_{n}) \in \F^{n}$.
+        We need to find a $v \in V$ such that $\comap{V}{\B}(v) = x$. Simply
+        choose
+        %
+        \[
+            v = x_{1} v_{1} + x_{2} v_{2} + \dots + x_{n} v_{n} \in V
+        \]
+        %
+        and therefore
+        %
+        \[
+            \comap{V}{\B}(v) = \comat{v}{\B} = (x_{1}, x_{2}, \dots, x_{n}) = x.
+        \]
+    \end{enumerate}
+    %
+    Thus, the linear transformation $\comap{V}{\B}$ is bijective
+    and hence is an isomorphism. Now, let $v_{i} \in \B$ be any basis
+    vector of $V$. Then,
+    %
+    \[
+        v_{i} = 0 \cdot v_{1} + \dots + 1 \cdot v_{i} + \dots + 0 \cdot v_{n}  
+    \]
+    %
+    and therefore
+    %
+    \[
+        \comat{v_i}{\B} = (0, \dots, 0, 1, 0, \dots, 0) = e_{i}
+    \]
+    %
+    Thus $\comap{V}{\B}(v_{i}) = \comat{v_{i}}{\B} = e_{i}$, which
+    completes our proof.
+\end{proof}
+
+Notice that since $\comap{V}{\B}$ is an isomorphism, therefore invertible,
+one can also write $\comap{V}{\B}^{-1}(e_{i}) = v_{i}$ for all $1 \leq i \leq n$.
+
+\begin{definition} \label{def1}
+    Let $V$ be a vector space over the field $\F$. Let
+    $\B = (v_{1}, v_{2}, \dots, v_{n})$ be an ordered basis for $V$ and let
+    $\{e_{1}, e_{2}, \dots, e_{n}\}$ be the standard basis of $\F^{n}$. The
+    preceeding theorem guarantees that there exists an isomorphism
+    %
+    \[
+        \function{\phi}
+        {V}{\F^{n}}
+        {v}{\phi(v) = \comat{v}{\B}}  
+    \]
+    %
+    with $\phi(v_{i}) = e_{i}$. We define this isomorphism as the
+    \textbf{coordinate map of $V$ with respect to basis $\B$} and denote
+    it by $\comap{V}{\B}$.
+\end{definition}
+
+This transformation will play an important role in defining
+the $\F^{n} \to \F^{m}$ representation of a linear transformation
+by providing an isomorphism between $V$ and $\F^{n}$.
+
+
+\subsection{$\F^{n} \to \F^{m}$ Representation of a Linear Transformation}
+
+\begin{remark}
+    The set $\transfs{V}{W}$ denotes the space of linear transformations
+    from $V$ to $W$, where $V$ and $W$ are vector spaces over the field $\F$.
+\end{remark}
+
+As we discussed in section \ref{intro}, if we can find a linear transformation
+$\func{\phi}{\F^{n}}{\F^{m}}$ such that $\phi(\comat{v}{\B}) =
+\comat{\varphi(v)}{\C}$, we will be able to find a matrix such that
+$\comat{\varphi(v)}{\C} = A \cdot \comat{v}{\B}$. In the next theorem,
+we will prove the existence of such a transformation.
+
+\begin{theorem} \label{thrm2}
+    Let $V$ and $W$ be vector spaces over the same field $\F$ with ordered
+    bases $\B = (v_{1}, v_{2}, \dots, v_{n})$ and
+    $\C = (w_{1}, w_{2}, \dots, w_{m})$, respectively. Let $\comap{V}{\B}$
+    be the coordinate map of $V$ with respect to basis $\B$ and let
+    $\comap{W}{\C}$ be the coordinate map of $W$ with respect to basis $\C$.
+    Then there exists a unique linear transformation
+    $\func{\phi}{\F^{n}}{\F^{m}}$ that satisfies the equality
+    \[
+        \comptwo{\phi}{\comap{V}{\B}} = \comptwo{\comap{W}{\C}}{\varphi}
+    \]
+    for all $\varphi \in \transfs{V}{W}$.
+\end{theorem}
+
+\begin{proof}
+    To visualize what we are going to do, consider the following diagram
+    %
+    \[
+        \begin{tikzcd}[row sep=large,column sep=large]
+            \F^{n} \arrow[rrr, "\compthr{\comap{W}{\C}}{\varphi}{\comap{V}{\B}^{-1}}"] \arrow[ddd, red, "\comap{V}{\B}^{-1}", shift left=2] &  &  & \F^{m} \arrow[ddd, "\comap{W}{\C}^{-1}", shift left=2] \\
+                                                                                                                                            &  &  &                                                        \\
+                                                                                                                                            &  &  &                                                        \\
+            V \arrow[rrr, brown, "\varphi"] \arrow[uuu, "\comap{V}{\B}", shift left=2]                                                      &  &  & W \arrow[uuu, blue, "\comap{W}{\C}", shift left=2]                
+        \end{tikzcd}
+    \]
+    %
+    and using this diagram, we can define the function
+    %
+    \[
+        \function{\compthr{{\color{blue}\comap{W}{\C}}}{{\color{brown}\varphi}}{{\color{red}\comap{V}{\B}^{-1}}}}
+        {\F^n}{\F^m}
+        {x}{(\compthr{\comap{W}{\C}}{\varphi}{\comap{V}{\B}^{-1}})(x)}
+    \]
+    %
+    which we claim is the function we are looking for. But first, we
+    need to show that it is a linear transformation in the most terrifying way
+    possible:
+    %
+    \begin{itemize}
+        \item[(a)] For all $x, y \in \F^{n}$,
+        \begin{align*}
+            (\compthr{\comap{W}{\C}}{\varphi}{\comap{V}{\B}^{-1}})(x + y) &= \comap{W}{\C}(\varphi(\comap{V}{\B}^{-1}(x + y))) \\
+                                                                          &= \comap{W}{\C}(\varphi(\comap{V}{\B}^{-1}(x) + \comap{V}{\B}^{-1}(y)))                                                 &\text{($\comap{V}{\B}^{-1}$ is linear)} \\
+                                                                          &= \comap{W}{\C}(\varphi(\comap{V}{\B}^{-1}(x)) + \varphi(\comap{V}{\B}^{-1}(y)))                                        &\text{($\varphi$ is linear)} \\
+                                                                          &= \comap{W}{\C}(\varphi(\comap{V}{\B}^{-1}(x))) + \comap{W}{\C}(\varphi(\comap{V}{\B}^{-1}(y)))                         &\text{($\comap{W}{\C}$ is linear)} \\
+                                                                          &= (\compthr{\comap{W}{\C}}{\varphi}{\comap{V}{\B}^{-1}})(x) + (\compthr{\comap{W}{\C}}{\varphi}{\comap{V}{\B}^{-1}})(y).
+        \end{align*}
+
+        \item[(b)] For all $x \in \F^{n}$, $c \in \F$,
+        \begin{align*}
+            (\compthr{\comap{W}{\C}}{\varphi}{\comap{V}{\B}^{-1}})(c \cdot x) &= \comap{W}{\C}(\varphi(\comap{V}{\B}^{-1}(c \cdot x))) \\
+                                                                              &= \comap{W}{\C}(\varphi(c \cdot \comap{V}{\B}^{-1}(x)))             &\text{($\comap{V}{\B}^{-1}$ is linear)} \\
+                                                                              &= \comap{W}{\C}(c \cdot \varphi(\comap{V}{\B}^{-1}(x)))             &\text{($\varphi$ is linear)} \\
+                                                                              &= c \cdot \comap{W}{\C}(\varphi(\comap{V}{\B}^{-1}(x)))             &\text{($\comap{W}{\C}$ is linear)} \\
+                                                                              &= c \cdot (\compthr{\comap{W}{\C}}{\varphi}{\comap{V}{\B}^{-1}})(x).
+        \end{align*}
+    \end{itemize}
+    %
+    Now, let us show that this linear transformation satisfies the equality
+    %
+    \[
+        \comptwo{(\compthr{\comap{W}{\C}}{\varphi}{\comap{V}{\B}^{-1}})}{\comap{V}{\B}} = \comptwo{\comap{W}{\C}}{\varphi}.
+    \]
+    %
+    It can be easily verified as follows: Let $v \in V$. Then
+    %
+    \[
+        \comptwo{(\compthr{\comap{W}{\C}}{\varphi}{\comap{V}{\B}^{-1}})}{\comap{V}{\B}} = \compthr{\comap{W}{\C}}{\varphi}{(\comptwo{\comap{V}{\B}^{-1}}{\comap{V}{\B}})}
+                                                                                        = \comptwo{\comap{W}{\C}}{\varphi}.
+    \]
+    %
+    Finally, for the uniqueness part, let $\phi^{\prime}$ and $\phi$ be two
+    linear transformations that satisfy this equality. Then
+    %
+    \begin{align*}
+        (\comptwo{\phi^{\prime}}{\comap{V}{\B}} = \comptwo{\comap{W}{\C}}{\varphi}
+        \quad \And \quad
+        \comptwo{\phi}{\comap{V}{\B}} = \comptwo{\comap{W}{\C}}{\varphi})
+        &\implies \comptwo{\phi^{\prime}}{\comap{V}{\B}} = \comptwo{\phi}{\comap{V}{\B}} \\
+        &\implies \comptwo{(\comptwo{\phi^{\prime}}{\comap{V}{\B}})}{\comap{V}{\B}^{-1}} = \comptwo{(\comptwo{\phi}{\comap{V}{\B}})}{\comap{V}{\B}^{-1}} \\
+        &\implies \comptwo{\phi^{\prime}}{(\comap{V}{\B}^{-1})} = \comptwo{\phi}{(\comap{V}{\B}^{-1})} \\
+        &\implies \phi^{\prime} = \phi
+    \end{align*}
+    %
+    which completes our proof.
+\end{proof}
+
+Notice that for $v \in V$, we have
+$\phi(\comap{V}{\B}(v)) = \comap{W}{\C}(\varphi(v))$ and since
+$\comap{V}{\B}(v) = \comat{v}{\B}$ and
+$\comap{W}{\C}(\varphi(v)) = \comat{\varphi(v)}{\C}$ this equality becomes
+%
+\[
+    \phi(\comat{v}{\B}) = \comat{\varphi(v)}{\C}.    
+\]
+%
+as we wanted.
+
+\begin{definition} \label{def2}
+    Let $V$ and $W$ be vector spaces over a field $\F$. Let $\B$
+    and $\C$ be bases for $V$ and $W$ respectively. The preceding theorem
+    guarantees that there exists a unique linear transformation
+    %
+    \[
+        \function{\compthr{\comap{W}{\C}}{\varphi}{\comap{V}{\B}^{-1}}}
+        {\F^{n}}{\F^{m}}
+        {\comat{v}{\B}}{\comat{\varphi(v)}{\C}} 
+    \]
+    %
+    for all $\varphi \in \transfs{V}{W}$, where $\comap{V}{\B}$ and
+    $\comap{W}{\C}$ are the coordinate maps of $V$ and $W$ respectively.
+    We call this transformation the \textbf{representation of
+    $\varphi$ as a transformation from $\F^{n}$ to $\F^{m}$ with respect to
+    bases $\B$ and $\C$} and denote it by $\rep{\varphi}$. In other words,
+    %
+    \[
+        \rep{\varphi}(x) := (\compthr{\comap{W}{\C}}{\varphi}{\comap{V}{\B}^{-1}})(x)
+    \]
+    %
+    for all $x \in \F^{n}$.
+\end{definition}
+
+
+\begin{lemma} \label{lem1}
+    Let $V$ and $W$ be vector spaces over a field $\F$ with $\dim{V} = n$ and
+    $\dim{W} = m$. Let $\B$ and $\C$ be bases for $V$ and $W$ respectively.
+    Then
+    %
+    \begin{enumerate}
+        \item For all $\varphi, \psi \in \transfs{V}{W}$,
+        \[
+            \rep{\varphi + \psi} =
+            \rep{\varphi} + \rep{\psi}.
+        \]
+
+        \item For all $\varphi \in \transfs{V}{W}$, $c \in \F$,
+        \[
+            \rep{c \cdot \varphi} =
+            c \cdot \rep{\varphi}.
+        \]
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Let $\comap{V}{\B}$ and $\comap{W}{\C}$ be the coordinate maps of $V$
+    and $W$ respectively. Let $x \in \F^{n}$. Then, clearly
+    %
+    \begin{align*}
+        \rep{\varphi + \psi}(x) &= (\compthr{\comap{W}{\C}}{(\varphi + \psi)}{\comap{V}{\B}^{-1}})(x)                                                 &\text{(\cref{def2})} \\
+                                &= \comap{W}{\C}((\varphi + \psi)(\comap{V}{\B}^{-1}(x))) \\
+                                &= \comap{W}{\C}(\varphi(\comap{V}{\B}^{-1}(x)) + \psi(\comap{V}{\B}^{-1}(x))) \\
+                                &= \comap{W}{\C}(\varphi(\comap{V}{\B}^{-1}(x))) + \comap{W}{\C}(\psi(\comap{V}{\B}^{-1}(x)))                         &\text{($\comap{W}{\C}$ is linear)} \\
+                                &= (\compthr{\comap{W}{\C}}{\varphi}{\comap{V}{\B}^{-1}})(x) + (\compthr{\comap{W}{\C}}{\psi}{\comap{V}{\B}^{-1}})(x) \\
+                                &= \rep{\varphi}(x) + \rep{\psi}(x).                                  
+    \end{align*}
+    %
+    and thus we proved the first part of our theorem. Similarly,
+    %
+    \begin{align*}
+        \rep{c \cdot \varphi}(x) &= (\compthr{\comap{W}{\C}}{(c \cdot \varphi)}{\comap{V}{\B}^{-1}})(x) &\text{(\cref{def2})} \\
+                                 &= \comap{W}{\C}((c \cdot \varphi)(\comap{V}{\B}^{-1}(x))) \\
+                                 &= \comap{W}{\C}(c \cdot \varphi(\comap{V}{\B}^{-1}(x))) \\
+                                 &= c \cdot \comap{W}{\C}(\varphi(\comap{V}{\B}^{-1}(x)))               &\text{($\comap{W}{\C}$ is linear)} \\
+                                 &= c \cdot (\compthr{\comap{W}{\C}}{\varphi}{\comap{V}{\B}^{-1}})(x) \\
+                                 &= c \cdot \rep{\varphi}(x)     				
+    \end{align*}
+    %
+    as we stated.
+\end{proof}
+
+
+\subsection{The Isomorphism Between $\transfs{V}{W}$ and $\transfs{\F^{n}}{\F^{m}}$}
+
+\begin{theorem} \label{thrm4}
+    Let $V$ and $W$ be vector spaces over the same field $\F$. Then there
+    exists an isomorphism between $\transfs{V}{W}$ and $\transfs{\F^{n}}{\F^{m}}$.
+\end{theorem}
+
+\begin{proof}
+    We claim that the function
+    %
+    \[
+        \function{\Theta}
+        {\transfs{V}{W}}{\transfs{\F^{n}}{\F^{m}}}
+        {\varphi}{\rep{\varphi} = \compthr{\comap{W}{\C}}{\varphi}{\comap{V}{\B}^{-1}}} 
+    \]
+    %
+    that maps a linear transformation to its $\F^{n} \to \F^{m}$ representation
+    (with respect to bases $\B$ and $\C$) is an isomorphism from
+    $\transfs{V}{W}$ to $\transfs{\F^{n}}{\F^{m}}$.
+    %
+    \begin{enumerate}
+        \item \textbf{Linearity.}
+        \begin{enumerate}
+            \item For all $\varphi, \psi \in \transfs{V}{W}$,
+            \begin{align*}
+                \Theta(\varphi + \psi) &= \rep{\varphi + \psi} \\
+                                       &= \rep{\varphi} + \rep{\psi}     &\text{(\cref{lem1})} \\
+                                       &= \Theta(\varphi) + \Theta(\psi).
+            \end{align*}
+
+            \item For all $\varphi \in \transfs{V}{W}$, $c \in \F$,
+            \begin{align*}
+                \Theta(c \cdot \varphi) &= \rep{c \cdot \varphi} \\
+                                        &= c \cdot \rep{\varphi}   &\text{(\cref{lem1})} \\
+                                        &= c \cdot \Theta(\varphi).
+            \end{align*}
+        \end{enumerate}
+        %
+        Now, let us show that this linear transformation is a bijection.
+        \vspace*{0.2cm}
+
+        \item \textbf{Injectivity.} Let $\varphi, \psi \in \transfs{V}{W}$ and
+        let $\Theta(\varphi) = \Theta(\psi)$. We need to show that
+        $\varphi = \psi$.
+        %
+        \begin{align*}
+            \Theta(\varphi) = \Theta(\psi) &\implies \rep{\varphi} = \rep{\psi} \\
+                                           &\implies (\compthr{\comap{W}{\C}}{\varphi}{\comap{V}{\B}^{-1}})(x) = (\compthr{\comap{W}{\C}}{\psi}{\comap{V}{\B}^{-1}})(x) \quad \forall x \in \F^{n}  &\text{(\cref{def2})} \\
+                                           &\implies (\compthr{\comap{W}{\C}}{\varphi}{\comap{V}{\B}^{-1}})(x) - (\compthr{\comap{W}{\C}}{\psi}{\comap{V}{\B}^{-1}})(x) = 0 \\
+                                           &\implies \comap{W}{\C}(\varphi(\comap{V}{\B}^{-1}(x))) - \comap{W}{\C}(\psi(\comap{V}{\B}^{-1}(x))) = 0 \\
+                                           &\implies \comap{W}{\C}(\varphi(\comap{V}{\B}^{-1}(x)) - \psi(\comap{V}{\B}^{-1}(x))) = 0                                                                &\text{($\comap{W}{\C}$ is linear)} \\
+                                           &\implies \varphi(\comap{V}{\B}^{-1}(x)) - \psi(\comap{V}{\B}^{-1}(x)) = 0                                                                               &\text{($\comap{W}{\C}$ is an isomorphism)} \\
+                                           &\implies \varphi(\comap{V}{\B}^{-1}(x)) = \psi(\comap{V}{\B}^{-1}(x)).
+        \end{align*}
+        %
+        Now, let $v \in V$ be arbitrary. Since the linear transformation
+        $\comap{V}{\B}^{-1}$ is an isomorphism and therefore surjective, there
+        exists a $y \in \F^{n}$ such that $\comap{V}{\B}^{-1}(y) = v$. Thus,
+        %
+        \[
+            \varphi(\comap{V}{\B}^{-1}(y)) = \psi(\comap{V}{\B}^{-1}(y)) 
+            \implies \varphi(v) = \psi(v)
+        \]
+        %
+        and since $v \in V$ was arbitrary, it concludes that $\varphi = \psi$.
+        \vspace{0.2cm}
+        
+        \item \textbf{Surjectivity.} Let $f \in \transfs{\F^{n}}{\F^{m}}$.
+        We need to find a $\varphi \in \transfs{V}{W}$ such that
+        $f = \rep{\varphi}$. By considering the diagram below
+        %
+        \[
+            \begin{tikzcd}[row sep=large,column sep=large]
+                \F^n \arrow[rrr, brown, "f"] \arrow[ddd, "\comap{V}{\B}^{-1}", shift left=2]                                    &  &  & \F^m \arrow[ddd, blue, "\comap{W}{\C}^{-1}", shift left=2] \\
+                                                                                                                                &  &  &                                                            \\
+                                                                                                                                &  &  &                                                            \\
+                V \arrow[uuu, red, "\comap{V}{\B}", shift left=2] \arrow[rrr, "\compthr{\comap{W}{\C}^{-1}}{f}{\comap{V}{\B}}"] &  &  & W \arrow[uuu, "\comap{W}{\C}", shift left=2]                
+            \end{tikzcd}
+        \]
+        %
+        simply choose the function
+        %
+        \[
+            \function{\varphi}
+            {V}{W}
+            {v}{\varphi(v) = (\compthr{{\color{blue}\comap{W}{\C}^{-1}}}{{\color{brown}f}}{{\color{red}\comap{V}{\B}}})(v)}    
+        \]
+        %
+        where $\func{\comap{V}{\B}}{V}{\F^{n}}$ and $\func{\comap{W}{\C}}{W}{\F^{m}}$
+        are the coordinate maps of $V$ and $W$, with respect to bases $\B$ and
+        $\C$ respectively. Let us easily verify that this function is a linear
+        transformation.
+        %
+        \begin{itemize}
+            \item[(a)] For all $v, w \in V$,
+            \begin{align*}
+                \varphi(v + w) &= (\compthr{\comap{W}{\C}^{-1}}{f}{\comap{V}{\B}})(v + w) \\
+                               &= \comap{W}{\C}^{-1}(f(\comap{V}{\B}(v + w))) \\
+                               &= \comap{W}{\C}^{-1}(f(\comap{V}{\B}(v) + \comap{V}{\B}(w)))                                                &\text{($\comap{V}{\B}$ is linear)} \\
+                               &= \comap{W}{\C}^{-1}(f(\comap{V}{\B}(v)) +  f(\comap{V}{\B}(w)))                                            &\text{($f$ is linear)} \\
+                               &= \comap{W}{\C}^{-1}(f(\comap{V}{\B}(v))) + \comap{W}{\C}^{-1}(f(\comap{V}{\B}(w)))                         &\text{($\comap{W}{\C}^{-1}$ is linear)} \\
+                               &= (\compthr{\comap{W}{\C}^{-1}}{f}{\comap{V}{\B}})(v) + (\compthr{\comap{W}{\C}^{-1}}{f}{\comap{V}{\B}})(w) \\
+                               &= \varphi(v) + \varphi(w).
+            \end{align*}
+            
+            \item[(b)] For all $v \in V$, $c \in \F$,
+            \begin{align*}
+                \varphi(c \cdot v) &= (\compthr{\comap{W}{\C}^{-1}}{f}{\comap{V}{\B}})(c \cdot v) \\
+                                   &= \comap{W}{\C}^{-1}(f(\comap{V}{\B}(c \cdot v))) \\
+                                   &= \comap{W}{\C}^{-1}(f(c \cdot \comap{V}{\B}(v)))             &\text{($\comap{V}{\B}$ is linear)} \\
+                                   &= \comap{W}{\C}^{-1}(c \cdot f (\comap{V}{\B}(v)))            &\text{($f$ is linear)} \\
+                                   &= c \cdot \comap{W}{\C}^{-1}(f(\comap{V}{\B}(v)))             &\text{($\comap{W}{\C}^{-1}$ is linear)} \\
+                                   &= c \cdot (\compthr{\comap{W}{\C}^{-1}}{f}{\comap{V}{\B}})(v) \\
+                                   &= c \cdot \varphi(v).
+            \end{align*}
+        \end{itemize}
+        %
+        Now, it follows that
+        %
+        \begin{align*}
+            \Theta(\varphi) &= \rep{\varphi} \\
+                            &= \compthr{\comap{W}{\C}}{\varphi}{\comap{V}{\B}^{-1}}                                          &\text{(\cref{def2})} \\
+                            &= \compthr{\comap{W}{\C}}{(\compthr{\comap{W}{\C}^{-1}}{f}{\comap{V}{\B}})}{\comap{V}{\B}^{-1}} \\
+                            &= \compthr{(\comptwo{\comap{W}{\C}}{\comap{W}{\C}^{-1}})}{f}{(\comptwo{\comap{V}{\B}}{\comap{V}{\B}^{-1}})} \\
+                            &= f.
+        \end{align*}
+    \end{enumerate}
+    %
+    Therefore, since the linear transformation $\Theta$ is bijective, it is an
+    isomorphism. Thus, the space of linear transformations from $V$ to $W$ is
+    isomorphic to the space of linear transformations from $\F^{n}$ to $\F^{m}$,
+    as we stated.
+\end{proof}
