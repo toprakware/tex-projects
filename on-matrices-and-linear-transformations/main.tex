@@ -1,0 +1,58 @@
+\documentclass[12pt]{amsart}
+
+% Packages
+\usepackage[a4paper,margin=3cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage{tikz-cd}
+\usepackage{cleveref}
+\usepackage{commands}
+
+% Environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+
+
+\begin{document}
+
+    \title{On matrices and linear transformations}
+    \author{Toprak Yilmaz}
+    \address{First-year Undergraduate, Department of Mathematics,
+    Yıldız Technical University, Istanbul, Turkey}
+    \email{toprak.yilmaz@std.yildiz.edu.tr}
+    \keywords{Matrices, Linear transformations, Coordinate matrix, Coordinate map,
+    Matrix of a linear transformation}
+
+    \begin{abstract}
+        Everyone who has taken an introductory level linear algebra course should
+        be aware of the correlation between matrices and linear transformations.
+        In this paper, which should be viewed as an educational resource rather
+        than an academic paper with groundbreaking original ideas, we aim to
+        approach to this correlation in a way that is as formal (consequently
+        nonsense) as possible, and define the matrix associated with a linear
+        transformation together with proving the isomorphism between
+        $\transfs{V}{W}$, the space of linear transformations from $V$ to $W$
+        where $V$ and $W$ are vector spaces over a field $\F$ with $\dim{V} = n$
+        and $\dim{W} = m$; and $\matrices$, the space of $m \times n$ matrices
+        with coefficients in $\F$. The prerequisites to read this paper are just
+        having taken an introductory linear algebra course and basic familiarity
+        with some fundamental mathematical notations.
+    \end{abstract}
+
+    \maketitle
+    \tableofcontents
+
+    % Sections
+    \input{intro}
+    \input{section2}
+    \input{section3}
+
+    % Bibliography
+    \bibliography{references.bib}
+    \bibliographystyle{plain}
+    \nocite{*}
+
+\end{document}
