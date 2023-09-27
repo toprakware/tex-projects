@@ -1,0 +1,454 @@
+\section{Matrices and Linear Transformations} \label{section3}
+
+\begin{remark}
+    The set $\matrices$ denotes the space of $m \times n$
+    matrices with coefficients in $\F$.
+\end{remark}
+
+In this section, we will define the matrix associated with a linear
+transformation and define an isomorphism between $\transfs{V}{W}$
+and $\matrices$. In the last subsection, we will be developing a way
+to numerically calculate the matrix of a linear transformation.
+
+
+\subsection{Matrix of a Linear Transformation from $\F^{n}$ to $\F^{m}$}
+
+\begin{theorem} \label{thrm5}
+    Let $\F^{n}$ and $\F^{m}$ be vector spaces over the same field $\F$.
+    Let $f \in \transfs{\F^{n}}{\F^{m}}$ be a
+    linear transformation. Then there exists a unique matrix
+    $A \in \matrices$ such that
+    %
+    \[
+        f(x) = A \cdot x
+    \]
+    %
+    for all $x \in \F^{n}$.
+\end{theorem}
+
+\begin{proof}
+    Let $\{e_{1}, e_{2}, \dots, e_{n}\}$ and $\{e_{1}^{\prime}, e_{2}^{\prime}, \dots, e_{m}^{\prime}\}$
+    be the standard bases of $\F^{n}$ and $\F^{m}$ respectively. Also let
+    $x = (x_{1}, x_{2}, \dots, x_{n}) \in \F^{n}$. Therefore, one can write
+    %
+    \[
+        x = x_{1} e_{1} + x_{2} e_{2} + \dots + x_{n} e_{n} = \sum_{j=1}^{n} x_{j} e_{j}.
+    \]
+    %
+    and hence
+    %
+    \[
+        f(x) = f\Big(\sum_{j=1}^{n} x_{j} e_{j} \Big) = \sum_{j=1}^{n} x_{j} \cdot f(e_{j})
+    \]
+    %
+    since $f$ is linear. Now, because $f(e_{j}) \in \F^{m}$ for $1 \leq j \leq n$,
+    there exist scalars $a_{ij} \in \F$ with $1 \leq j \leq n$, $1 \leq i \leq m$
+    such that
+    %
+    \begin{equation} \label{eq1}
+        f(e_{j}) = \sum_{i=1}^{m} a_{ij} e_{i}^{\prime}.
+    \end{equation}
+    %
+    Thus, it follows that
+    %
+    \begin{align*}
+        f(x) = f\Big(\sum_{j=1}^{n} x_{j} e_{j} \Big) &= \sum_{j=1}^{n} x_{j} \cdot f(e_{j}) \\
+                                                      &= \sum_{j=1}^{n} x_{j} \Big(\sum_{i=1}^{m} a_{ij} e_{i}^{\prime}\Big)   &\text{(\cref{eq1})} \\
+                                                      &= \sum_{j=1}^{n} \Big(\sum_{i=1}^{m} x_{j} a_{ij} e_{i}^{\prime}\Big)   &\text{(summation property)} \\
+                                                      &= \sum_{i=1}^{m} \Big(\sum_{j=1}^{n} x_{j} a_{ij} e_{i}^{\prime}\Big)   &\text{(summation property)} \\
+                                                      &= \sum_{i=1}^{m} \Big(\sum_{j=1}^{n} x_{j} a_{ij} \Big) e_{i}^{\prime}. &\text{(summation property)}
+    \end{align*}
+    %
+    If we write the last sum in its full form, we have
+    %
+    \begin{align*}
+        f(x) &= \Big(\sum_{j=1}^{n} x_{j} a_{1j}\Big) e_{1}^{\prime} 
+              + \Big(\sum_{j=1}^{n} x_{j} a_{2j}\Big) e_{2}^{\prime} 
+              + \dots + \Big(\sum_{j=1}^{n} x_{j} a_{mj}\Big) e_{m}^{\prime} \\
+             &= \begin{pmatrix}
+                    \sum_{j=1}^{n} x_{j} a_{1j} \\
+                    0 \\
+                    0 \\
+                    \vdots \\
+                    0
+                \end{pmatrix} +
+                \begin{pmatrix}
+                    0 \\
+                    \sum_{j=1}^{n} x_{j} a_{2j} \\
+                    0 \\
+                    \vdots \\
+                    0
+                \end{pmatrix} + \dots +
+                \begin{pmatrix}
+                    0 \\
+                    0 \\
+                    \vdots \\
+                    0 \\
+                    \sum_{j=1}^{n} x_{j} a_{mj}
+                \end{pmatrix}                                          &\text{($e_{i}^{\prime}$ standard basis vector)} \\
+             &= \begin{pmatrix}
+                    \sum_{j=1}^{n} x_{j} a_{1j} \\
+                    \sum_{j=1}^{n} x_{j} a_{2j} \\
+                    \vdots \\
+                    \sum_{j=1}^{n} x_{j} a_{mj}
+                \end{pmatrix} \\
+             &= \begin{pmatrix}
+                    a_{11} & a_{12} & \dots & a_{1n} \\
+                    a_{21} & a_{22} & \dots & a_{2n} \\
+                    \vdots & \vdots & \vdots & \vdots \\
+                    a_{m1} & a_{m2} & \dots & a_{mn}
+                \end{pmatrix}
+                \begin{pmatrix}
+                    x_{1} \\
+                    x_{2} \\
+                    \vdots \\
+                    x_{n}
+                \end{pmatrix}                                          &\text{(matrix multiplication)}
+    \end{align*}
+    %
+    and if we let $A = (a_{ij})_{\substack{1 \leq i \leq m \\ 1 \leq j \leq n}} \in \matrices$
+    it concludes that $f(x) = A \cdot x$. Now, for the uniqueness part, let
+    $A_{1}, A_{2} \in \matrices$ be two matrices such that
+    %
+    \[
+        f(x) = A_{1} \cdot x \qquad \text{and} \qquad f(x) = A_{2} \cdot x
+    \]
+    %
+    for all $x \in \F^{n}$. Therefore
+    %
+    \begin{align*}
+        A_{1} \cdot x = A_{2} \cdot x &\implies A_{1} \cdot x - A_{2} \cdot x = 0 \\
+                                      &\implies (A_{1} - A_{2}) \cdot x = 0
+    \end{align*}
+    %
+    and since the last equality is true for any $x \in \F^{n}$, it must be
+    the case that $A_{1} - A_{2} = 0$ and thus $A_{1} = A_{2}$.
+\end{proof}
+
+
+\subsection{Matrix of a Linear Transformation}
+
+Now, we are ready to define the matrix associated with a linear transformation.
+
+\begin{definition}[Matrix of a Linear Transformation] \label{def3}
+    Let $V$ and $W$ be vector spaces over the same field $\F$ and let
+    $\B$ and $\C$ be bases for $V$ and $W$ respectively, with
+    $\dim{V} = n$ and $\dim{W} = m$. Let $\varphi \in \transfs{V}{W}$
+    be a linear transformation and let $\rep{\varphi}$ be its representation as a
+    transformation from $\F^{n}$ to $\F^{m}$, with respect to bases
+    $\B$ and $\C$. By \cref{thrm5}, there exists a unique matrix
+    $A \in \matrices$ such that
+    %
+    \[
+        \rep{\varphi}(x) = A \cdot x    
+    \]
+    %
+    for all $x \in \F^{n}$. We define the \textbf{matrix associated with the
+    linear transformation $\varphi$ with respect to bases $\B$ and $\C$} as
+    $A$ and denote it by $\mat{\varphi}$. In other words,
+    %
+    \[
+        \rep{\varphi}(x) = \mat{\varphi} \cdot x
+    \]
+    %
+    for all $x \in \F^{n}$. Notice that for $x = \comat{v}{\B} \in \F^{n}$, we have
+    %
+    \[
+        \comat{\varphi(v)}{\C} = \mat{\varphi} \cdot \comat{v}{\B}
+    \]
+    %
+    for all $\varphi \in \transfs{V}{W}$, as we discussed.
+\end{definition}
+
+Thus, the matrix of an arbitrary linear transformation $\func{\varphi}{V}{W}$
+is the matrix satisfying
+%
+\[
+    \rep{\varphi}(x) = A \cdot x    
+\]
+%
+for all $x \in \F^{n}$, where $\rep{\varphi}$ is the representation of $\varphi$
+from $\F^{n}$ to $\F^{m}$. The uniqueness of such a matrix (by \cref{thrm5}),
+indeed, guarantees that the matrix associated with a linear transformation is
+well-defined.
+
+\begin{lemma} \label{lem2}
+    Let $V$ and $W$ be vector spaces over a field $\F$ and let $\B$
+    and $\C$ be bases for $V$ and $W$ respectively. Let $\varphi, \psi \in
+    \transfs{V}{W}$ and $c \in \F$. If $\varphi$ has the matrix
+    $\mat{\varphi}$ and $\psi$ has the matrix
+    $\mat{\psi}$, then
+    %
+    \begin{enumerate}
+        \item The linear transformation $\varphi + \psi$ has the matrix
+        \[
+            \mat{\varphi + \psi} =
+            \mat{\varphi} + 
+            \mat{\psi}.
+        \]
+
+        \item The linear transformation $c \cdot \varphi$ has the matrix
+        \[
+            \mat{c \cdot \varphi} =
+            c \cdot \mat{\varphi}.
+        \]
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Let $\rep{\varphi}$ be the representation of
+    $\varphi$ from $\F^{n}$ to $\F^{m}$ and $\rep{\psi}$
+    be the representation of $\psi$ from $\F^{n}$ to $\F^{m}$. Therefore,
+    one can write
+    %
+    \[
+        \rep{\varphi}(x) = \mat{\varphi} \cdot x
+        \qquad \text{and} \qquad
+        \rep{\psi}(x) = \mat{\psi} \cdot x
+    \]
+    %
+    for all $x \in \F^{n}$. For the first part, let $\rep{\varphi + \psi}$
+    be the representation of $\varphi + \psi$ from $\F^{n}$ to $\F^{m}$.
+    It follows that
+    %
+    \begin{align*}
+        \rep{\varphi + \psi}(x) &= (\rep{\varphi} + \rep{\psi})(x)            &\text{(\cref{lem1})} \\
+                                &= \rep{\varphi}(x) + \rep{\psi}(x) \\
+                                &= \mat{\varphi} \cdot x + \mat{\psi} \cdot x \\
+                                &= (\mat{\varphi} + \mat{\psi}) \cdot x.
+    \end{align*}
+    %
+    and thus, by \cref{def3}, the transformation $\varphi + \psi$ has the matrix
+    $\mat{\varphi} + \mat{\psi}$.
+    Now, for the second part, let $\rep{c \cdot \varphi}$ be
+    the representation of $c \cdot \varphi$ from $\F^{n}$ to $\F^{m}$. Then
+    %
+    \begin{align*}
+        \rep{c \cdot \varphi}(x) &= (c \cdot \rep{\varphi})(x)        &\text{(\cref{lem1})} \\
+                                 &= c \cdot \rep{\varphi}(x) \\
+                                 &= c \cdot (\mat{\varphi} \cdot x) \\
+                                 &= (c \cdot \mat{\varphi}) \cdot x. 
+    \end{align*}
+    %
+    and similarly, by \cref{def3}, the transformation $c \cdot \varphi$ has the matrix $c \cdot \mat{\varphi}$
+    as we stated.
+\end{proof}
+
+
+\subsection{The Isomorphism Between $\transfs{V}{W}$ and $\matrices$}
+
+Now by using the lemma, we will prove that the spaces $\transfs{V}{W}$
+and $\matrices$ are isomorphic, which is the main theorem of this paper.
+
+\begin{theorem}[The Isomorphism Theorem] \label{thrm7}
+    Let $V$ and $W$ be vector spaces over the same field $\F$. Then there
+    exists an isomorphism between $\transfs{V}{W}$ and
+    $\matrices$, i.e., these two spaces are isomorphic.
+\end{theorem}
+
+\begin{proof}
+    Let $\B$ and $\C$ be bases for $V$ and $W$ respectively. We
+    claim that the function
+    %
+    \[
+        \function{\Omega}
+        {\transfs{V}{W}}{\matrices}
+        {\varphi}{\mat{\varphi}}
+    \]
+    %
+    that maps a linear transformation to its matrix (with respect to bases $\B$
+    and $\C$) is an isomorphism from $\transfs{V}{W}$ to
+    $\matrices$. First, let us show that it is a linear transformation:
+    %
+    \begin{enumerate}
+        \item \textbf{Linearity.}
+        \begin{enumerate}
+            \item For all $\varphi, \psi \in \transfs{V}{W}$,
+            \begin{align*}
+                \Omega(\varphi + \psi) &= \mat{\varphi + \psi} \\
+                                       &= \mat{\varphi} + \mat{\psi}     &\text{(\cref{lem2})} \\
+                                       &= \Omega(\varphi) + \Omega(\psi).                                                           
+            \end{align*}
+            
+            \item For all $\varphi \in \transfs{V}{W}$, $c \in \F$,
+            \begin{align*}
+                \Omega(c \cdot \varphi) &= \mat{c \cdot \varphi} \\
+                                      &= c \cdot \mat{\varphi}   &\text{(\cref{lem2})} \\
+                                      &= c \cdot \Omega(\varphi). \\
+            \end{align*}
+        \end{enumerate}
+        %
+        Now, we need to show that this linear transformation is bijective.
+        \vspace*{0.2cm}
+
+        \item \textbf{Injectivity.} Let $\varphi, \psi \in \transfs{V}{W}$ and
+        let $\Omega(\varphi) = \Omega(\psi)$. We need to show that $\varphi = \psi$. Then
+        %
+        \[
+            \Omega(\varphi) = \Omega(\psi) \implies \mat{\varphi} = \mat{\psi}
+        \]
+        %
+        and since $\mat{\varphi}$ is the matrix of $\varphi$ and $\mat{\psi}$
+        is the matrix of $\psi$, one can write
+        %
+        \[
+            \rep{\varphi}(x) = \mat{\varphi} \cdot x
+            \qquad \text{and} \qquad
+            \rep{\psi}(x) = \mat{\psi} \cdot x
+        \]
+        %
+        for all $x \in \F^{n}$ by \cref{def3}. Therefore
+        %
+        \begin{align*}
+            \mat{\varphi} = \mat{\psi} 
+            &\implies \mat{\varphi} \cdot x = \mat{\psi} \cdot x \quad \forall x \in \F^{n} \\
+            &\implies \rep{\varphi}(x) = \rep{\psi}(x) \\
+            &\implies \varphi = \psi                                                        &\text{(\cref{thrm4})}
+        \end{align*}
+        %
+        and thus, $\Omega$ is injective.
+        \vspace*{0.2cm}
+
+        \item \textbf{Surjectivity.} Let $A \in \matrices$.
+        We need to find a $\varphi \in \transfs{V}{W}$ such that $A$ is
+        the matrix of $\varphi$ with respect to bases $\B$ and $\C$.
+        Simply choose
+        %
+        \[
+            \function{\varphi}
+            {\F^{n}}{\F^{m}}
+            {x}{\varphi(x) = A \cdot x}
+        \]
+        %
+        with $V = \F^{n}$ and $W = \F^{m}$ so that we have
+        $\rep{\varphi}(x) = \varphi(x) = A \cdot x$ for all $x \in \F^{n}$.
+        Let us show that this function is indeed a linear transformation.
+        %
+        \begin{itemize}
+            \item[(a)] For all $x, y \in \F^{n}$,
+            \begin{align*}
+                \varphi(x + y) &= A \cdot (x + y) \\
+                               &= A \cdot x + A \cdot y \\
+                               &= \varphi(x) + \varphi(y).
+            \end{align*}
+
+            \item[(b)] For all $x \in \F^{n}$, $c \in \F$,
+            \begin{align*}
+                \varphi(c \cdot x) &= A \cdot (c \cdot x) \\
+                                   &= c \cdot (A \cdot x) \\
+                                   &= c \cdot \varphi(x).
+            \end{align*}
+        \end{itemize}
+        %
+        Therefore, since $\varphi$ is a linear transformation with
+        $\rep{\varphi}(x) = A \cdot x$ for all $x \in \F^{n}$,
+        by \cref{def3}, $A$ is the matrix of $\varphi$ and hence
+        $\Omega(\varphi) = A$, meaning $\Omega$ is surjective.
+    \end{enumerate}
+    %
+    Thus, we showed that $\Omega$ is a bijective linear transformation,
+    meaning it is an isomorpism. Therefore, the space of linear
+    transformations from $V$ to $W$ is isomorphic to the space of
+    $m \times n$ matrices with coefficients in $\F$.
+\end{proof}
+
+We can visualize the final result by using the following diagram:
+%
+\[
+    \begin{tikzcd}[row sep=large,column sep=large]
+        \F^{n} \arrow[ddddd, "\comap{V}{\B}^{-1}", shift left=2] \arrow[rrrrr, "{\rep{\varphi}}"] &                                             &  &  &                                                            & \F^{m} \arrow[ddddd, "\comap{W}{\C}^{-1}", shift left=2] \\
+                                                                                                  & \comat{v}{\B} \arrow[rrr, maps to]          &  &  & \comat{\varphi(v)}{\C} = \mat{\varphi} \cdot \comat{v}{\B} &                                                          \\
+                                                                                                  &                                             &  &  &                                                            &                                                          \\
+                                                                                                  &                                             &  &  &                                                            &                                                          \\
+                                                                                                  & v \arrow[uuu, maps to] \arrow[rrr, maps to] &  &  & \varphi(v) \arrow[uuu, maps to]                            &                                                          \\
+        V \arrow[rrrrr, "\varphi"] \arrow[uuuuu, "\comap{V}{\B}", shift left=2]                   &                                             &  &  &                                                            & W \arrow[uuuuu, "\comap{W}{\C}", shift left=2]                
+    \end{tikzcd}
+\]
+
+
+\subsection{Finding the Matrix of a Linear Transformation}
+
+The theory aside, is it possible to find the matrix of a linear transformation
+without struggling with bunch of calculations? In other words, is there a
+method to numerically find the matrix of a given linear transformation?
+In this section, we will be developing such a method to achieve this.
+
+Assume the following: Let $V$ and $W$ be vector spaces over the field $\F$.
+Let $\B = (v_{1}, v_{2}, \dots, v_{n})$ and $\C = (w_{1}, w_{2}, \dots, w_{m})$
+be ordered bases for $V$ and $W$ respectively. Let
+$\{e_{1}, e_{2}, \dots, e_{n}\}$ be the standard basis of $\F^n$ and let
+$\{e_{1}^{\prime}, e_{2}^{\prime}, \dots, e_{m}^{\prime}\}$ be the standard
+basis of $\F^m$. Finally, let $\varphi \in \transfs{V}{W}$ be a linear
+transformation with its representation $\rep{\varphi} \in \transfs{\F^{n}}{\F^{m}}$
+from $\F^{n}$ to $\F^{m}$ and its matrix $\mat{\varphi}$ with respect to
+bases $\B$ and $\C$.
+
+Now, let $x = (x_{1}, x_{2}, \dots, x_{n}) \in \F^{n}$. Then, it follows that
+%
+\begin{align*}
+    \rep{\varphi}(x) &= \rep{\varphi}\Big(\sum_{j=1}^{n} x_{j} e_{j} \Big) \\
+                     &= \sum_{j=1}^{n} x_{j} \cdot \rep{\varphi}(e_{j})                                          &\text{($\rep{\varphi}$ is linear)} \\
+                     &= \sum_{j=1}^{n} x_{j} \cdot (\compthr{\comap{W}{\C}}{\varphi}{\comap{V}{\B}^{-1}})(e_{j}) &\text{(\cref{def2})} \\
+                     &= \sum_{j=1}^{n} x_{j} \cdot \comap{W}{\C}(\varphi(\comap{V}{\B}^{-1}(e_{j}))) \\
+                     &= \sum_{j=1}^{n} x_{j} \cdot \comap{W}{\C}(\varphi(v_{j}))                                 &\text{(\cref{thrm1})}
+\end{align*}
+%
+and since $\varphi(v_{j}) \in W$, there exist unique scalars $a_{ij} \in \F$
+such that
+%
+\begin{equation} \label{eq2}
+    \varphi(v_{j}) = \sum_{i=1}^{m} a_{ij} w_{i}
+\end{equation}
+%
+and therefore, we have
+%
+\begin{align*}
+    \rep{\varphi}(x) &= \sum_{j=1}^{n} x_{j} \cdot \comap{W}{\C}(\varphi(v_{j})) \\
+                     &= \sum_{j=1}^{n} x_{j} \cdot \comap{W}{\C}\Big(\sum_{i=1}^{m} a_{ij} w_{i}\Big)  &\text{(\cref{eq2})} \\
+                     &= \sum_{j=1}^{n} x_{j} \Big(\sum_{i=1}^{m}a_{ij} \cdot \comap{W}{\C}(w_{i})\Big) &\text{($\comap{W}{\C}$ is linear)} \\
+                     &= \sum_{j=1}^{n} x_{j} \Big(\sum_{i=1}^{m} a_{ij} e_{i}^{\prime}\Big)            &\text{(\cref{thrm1})} \\
+                     &= \sum_{i=1}^{m} \Big(\sum_{j=1}^{n} x_{j} a_{ij} e_{i}^{\prime}\Big)            &\text{(summation property)} \\
+                     &= \sum_{i=1}^{m} \Big(\sum_{j=1}^{n} x_{j} a_{ij}\Big) e_{i}^{\prime}.           &\text{(summation property)}          
+\end{align*}
+%
+As we seen in \cref{thrm5}, this concludes to
+%
+\[
+    \rep{\varphi}(x) = A \cdot x    
+\]
+%
+where $A = (a_{ij})_{\substack{1 \leq i \leq m \\ 1 \leq j \leq n}} \in \matrices$.
+Indeed, the matrix $A$ is nothing but the matrix of the transformation
+$\varphi$ by \cref{def2}, i.e.,
+%
+\[
+    \mat{\varphi} = (a_{ij})_{\substack{1 \leq i \leq m \\ 1 \leq j \leq n}}.
+\]
+%
+To make this calculation more useful and practical, notice that the coordinate
+matrix of $\varphi(v_{j}) \in W$ is
+%
+\[
+    \comat{\varphi(v_{j})}{\C} = \begin{pmatrix}
+                                    a_{1j} \\
+                                    a_{2j} \\
+                                    \vdots \\
+                                    a_{mj}
+                                \end{pmatrix}
+\]
+%
+by the \cref{eq2}. As one can clearly see, this column matrix is the
+$j^{\text{th}}$ column of the matrix $\mat{\varphi}$. Thus, it is possible
+to write
+%
+\[
+    \mat{\varphi} = \Big[\comat{\varphi(v_{1})}{\C} 
+    \; \big|
+    \; \comat{\varphi(v_{2})}{\C} \; \big| 
+    \; \cdots \; \big| 
+    \; \comat{\varphi(v_{n})}{\C}\Big]
+\]
+%
+which provides a relatively easy way to numerically calculate the matrix
+of a linear transformation. As always, the examples are trivial and is left
+to the reader as an exercise.
