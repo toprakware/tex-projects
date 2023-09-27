@@ -1,0 +1,79 @@
+\section{Introduction} \label{intro}
+
+Before entering the theorem-definition loop, we would like to
+emphasize a question whose answer will determine the progress
+of this paper. Which matrix qualifies to be the matrix of a given
+linear transformation? Assume $\F^{n}$ and $\F^{m}$ be vector spaces
+over the field $\F$ and let $\func{f}{\F^{n}}{\F^{m}}$ be a linear
+transformation from $\F^{n}$ to $\F^{m}$. As one would already know,
+there exists a (unique) matrix $A$ such that
+%
+\[
+    f(x) = A \cdot x
+\]
+%
+for all $x \in \F^{n}$, which we will prove in section \ref{section3}.
+Therefore, performing the transformation $f$ on the vector $x \in \F^{n}$
+is equivalent to multiplying this vector by the matrix $A$. Then, one can
+see that the matrix $A$ perfectly fits to be the associated matrix of the
+linear transformation $f$.
+
+Now, let $\func{\varphi}{V}{W}$ be a linear transformation where
+$V$ and $W$ are arbitrary vector spaces over a field $\F$ with $\dim{V} = n$
+and $\dim{W} = m$. Can we find a matrix $A$ such that
+%
+\[
+    \varphi(v) = A \cdot v
+\]
+for all $v \in V$? Unfortunately, it won't be that easy since multiplying
+a matrix with an element of an arbitrary vector space is not defined. Instead,
+we will use the fact that every vector $v \in V$ has a representation as an
+element of the vector space $\F^{n}$, that is, the (unique) coordinate matrix
+of $v$ with respect to a basis of $V$. 
+
+Let $\B$ and $\C$ be bases for $V$ and $W$ respectively. Consider the
+following functions
+%
+\[
+    \function{\comap{V}{\B}}{V}{\F^{n}}{v}{\comat{v}{\B}}
+    \qquad \text{and} \qquad
+    \function{\comap{W}{\C}}{W}{\F^{m}}{w}{\comat{w}{\C}}
+\]
+%
+that maps the vectors $v, w$ from $V$ and $W$ to their coordinate matrices
+$\comat{v}{\B}$ and $\comat{w}{\C}$ with respect to bases $\B$ and $\C$ of
+$V$ and $W$ respectively. Therefore, we have
+%
+\[
+    \comap{V}{\B}(v) = \comat{v}{\B}
+    \qquad \text{and} \qquad
+    \comap{W}{\C}(\varphi(v)) = \comat{\varphi(v)}{\C}    
+\]
+%
+for all $v \in V$ and $\varphi(v) \in W$. Now, consider the function
+%
+\[
+    \function{\phi}{\F^{n}}{\F^{m}}{\comat{v}{\B}}{\comat{\varphi(v)}{\C}}
+\]
+%
+in which we will see that is indeed a linear transformation from $\F^{n}$ to
+$\F^{m}$. Therefore, by the theorem we mentioned, there exists a unique matrix
+$A$ such that
+%
+\[
+    \phi(\comat{v}{\B}) = A \cdot \comat{v}{\B}    
+\]
+%
+and since $\phi(\comat{v}{\B}) = \comat{\varphi(v)}{\C}$, it concludes that
+%
+\[
+    \comat{\varphi(v)}{\C} = A \cdot \comat{v}{\B}    
+\]
+%
+for all $v \in V$. Thus, since $\comat{v}{\B}$ and $\comat{\varphi(v)}{\C}$
+are uniquely determined by $v$ and $\varphi(v)$ and the matrix $A$ is unique,
+this matrix is the perfect candidate to be the matrix associated with the
+linear transformation $\func{\varphi}{V}{W}$ and provide an isomorphism between
+the space of linear transformations from $V$ to $W$ and the space of $m \times n$
+matrices where $\dim{V} = n$ and $\dim{W} = m$, as we will see in the section
+\ref{section3}.
