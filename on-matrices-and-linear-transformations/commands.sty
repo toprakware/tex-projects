@@ -1,0 +1,41 @@
+% Sets
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\C}{\mathcal{C}}
+
+% Vector spaces
+\newcommand{\transfs}[2]{\mathcal{L}_{\F}(#1, #2)}
+\newcommand{\matrices}{\mathcal{M}_{m \times n}(\F)}
+
+% Matrices
+\newcommand{\mat}[1]{\mathbf{M}(#1; \B, \C)}
+\newcommand{\comat}[2]{[#1]_{#2}}
+
+% Functions
+\newcommand{\rep}[1]{\mathbf{R}_{(#1; \B, \C)}}
+\newcommand{\comap}[2]{\gamma_{(#1; #2)}}
+\newcommand{\func}[3]{#1 \colon #2 \to #3}
+\newcommand{\comptwo}[2]{#1 #2}
+\newcommand{\compthr}[3]{#1 #2 #3}
+\tikzcdset{every label/.append style = {font = \normalsize}}
+\tikzset{
+  symbol/.style={
+    draw=none,
+    every to/.append style={
+      edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+  }
+}
+\newcommand{\function}[5]{
+  \begin{tikzcd}[
+    column sep=3em,
+    row sep=1.5ex,
+    ampersand replacement=\&
+  ]
+  #1\colon \&[-3em]
+  #2\vphantom{#3} \arrow[r] \&
+  #3\vphantom{#2} \\
+  \&
+  #4\vphantom{#5} \arrow[u,symbol=\in] \arrow[r,mapsto] \&
+  #5\vphantom{#4} \arrow[u,symbol=\in]
+  \end{tikzcd}
+}
